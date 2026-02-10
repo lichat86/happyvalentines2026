@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Ngày Lễ Tình Nhân</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --apple-text: #1d1d1f;
+            --love-pink: #ff4d6d;
+            --love-gradient: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 100%);
+            --sub-text: #86868b;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #ffffff;
+            color: var(--apple-text);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+            overflow-x: hidden;
+            transition: background-color 1.5s ease;
+        }
+
+        /* 隐藏数字输入框箭头 */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+
+        /* 动态流动背景 */
+        body.unlocked {
+            background: linear-gradient(-45deg, #fff5f7, #ffecf2, #e0f2fe, #fff5f7);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- 优化后的登录层 --- */
+        #password-overlay {
+            position: fixed; inset: 0; 
+            /* 升级背景：放射状渐变 */
+            background: radial-gradient(circle at center, #fff5f7 0%, #ffffff 100%);
+            z-index: 10000;
+            display: flex; justify-content: center; align-items: center; transition: 1.2s;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 45px; border-radius: 35px; text-align: center;
+            /* 升级阴影：更柔和的多层阴影 */
+            box-shadow: 0 20px 60px rgba(0,0,0,0.05), 0 10px 20px rgba(255, 77, 109, 0.05); 
+            width: 88%; max-width: 380px;
+            /* 细致边框 */
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .login-card h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: clip;
+            font-size: 2rem;
+            background: var(--love-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #password-input {
+            border: 1px solid rgba(0,0,0,0.05); 
+            background: rgba(255,255,255,0.5); 
+            border-radius: 16px;
+            outline: none; font-size: 1.8rem; text-align: center; width: 100%; 
+            padding: 15px; margin: 25px 0; letter-spacing: 8px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: 0.3s;
+        }
+        #password-input:focus {
+            border-color: #ff8fa3;
+            background: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 77, 109, 0.1);
+        }
+
+        /* 升级按钮：呼吸效果 */
+        @keyframes pulse-btn {
+            0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 77, 109, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+        }
+        .enter-btn-login {
+            background: var(--love-gradient); color: white; border: none; padding: 18px 40px; border-radius: 35px;
+            cursor: pointer; font-size: 1.1rem; font-weight: 600; transition: 0.3s;
+            animation: pulse-btn 2s infinite;
+        }
+        .enter-btn-login:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
+        }
+
+        .shake { animation: shake 0.4s both; border: 1px solid #ff4d6d !important; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        /* 内容布局 */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+        .section { min-height: 90vh; display: flex; align-items: center; padding: 80px 0; }
+        .story-row { display: flex; align-items: center; gap: 60px; width: 100%; }
+        .photo-wrapper {
+            flex: 1.2; border-radius: 30px; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            transition: 0.8s;
+        }
+        .photo-wrapper:hover { transform: translateY(-10px); }
+        img, video { width: 100%; display: block; }
+
+        h1 { font-size: 4rem; font-weight: 800; background: var(--love-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .big-number { font-size: 5.5rem; color: var(--love-pink); font-weight: 900; line-height: 1; }
+        h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 15px; }
+        .typewriter { font-size: 1.15rem; color: var(--sub-text); line-height: 1.8; min-height: 3em; }
+
+        /* 爱心雨 */
+        .heart-rain { position: fixed; top: -10%; z-index: 1; pointer-events: none; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(115vh) rotate(360deg); } }
+
+        /* 音乐控制 */
+        #music-control {
+            position: fixed; top: 30px; right: 30px; z-index: 1001; width: 50px; height: 50px;
+            background: var(--glass-bg); backdrop-filter: blur(15px); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5);
+        }
+        .rotating { animation: rotate 3s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* 惊喜弹窗 */
+        #surprise-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px);
+            z-index: 20000; display: none; opacity: 0; align-items: center; justify-content: center; transition: 0.5s;
+        }
+        .modal-content {
+            background: white; width: 90%; max-width: 550px; max-height: 85vh; padding: 40px; border-radius: 40px;
+            position: relative; box-shadow: 0 30px 100px rgba(255, 77, 109, 0.3);
+            transform: translateY(50px); transition: 0.5s;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: clip;
+            font-size: 1.8rem;
+        }
+
+        .modal-active .modal-content { transform: translateY(0); }
+        .close-modal { position: absolute; top: 20px; right: 25px; font-size: 1.5rem; cursor: pointer; color: #ccc; }
+
+        .letter-text {
+            color: #444; line-height: 1.8; font-size: 1.05rem; text-align: justify; margin-top: 15px;
+        }
+        .letter-footer {
+            text-align: right; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;
+        }
+
+        .enter-btn {
+            background: var(--love-gradient); color: white; border: none; padding: 18px 40px; border-radius: 35px;
+            cursor: pointer; font-size: 1.1rem; font-weight: 600; transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .story-row { flex-direction: column !important; text-align: center !important; }
+            h1 { font-size: 2.5rem; }
+            .modal-content { padding: 30px 20px; }
+            .login-card h2 { font-size: 1.5rem; }
+            .modal-content h2 { font-size: 1.3rem; }
+        }
+        [data-aos] { opacity: 1 !important; transform: none !important; }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-audio" loop><source src="music.mp3" type="audio/mpeg"></audio>
+    <div id="music-control" onclick="toggleMusic()">🎵</div>
+
+    <div id="password-overlay">
+        <div class="login-card">
+            <h2>LỐI VÀO TÌNH YÊU</h2>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--sub-text);">Nhập mật khẩu để mở khóa câu chuyện tình yêu</p>
+            <input type="number" id="password-input" placeholder="····">
+            <button class="enter-btn-login" style="width:100%" onclick="verify()">Mở Khóa Tình Yêu</button>
+        </div>
+    </div>
+
+    <div id="surprise-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">×</span>
+            <div style="font-size: 3rem; margin-bottom: 10px; text-align: center;">💌</div>
+            <h2 style="color: var(--love-pink); text-align: center; margin-bottom: 15px;">Gửi em yêu Lê Hiên Xuân Diệu</h2>
+            <div class="letter-text">
+                <p>Từ ngày 23/10/2024, câu chuyện của chúng ta đã bắt đầu một cách âm thầm. Ngày đó, chúng ta lần đầu gặp nhau, lần đầu trò chuyện, và trái tim anh đã âm thầm rung động vì em. Qua từng cuộc trò chuyện, trái tim anh dần tiến gần em hơn — từ rung động, đến thích, rồi đến tình yêu không thể kiềm chế.</p><br>
+                <p>Anh vẫn nhớ ngày 17/11/2024, khi chúng ta cuối cùng thừa nhận tình cảm dành cho nhau, trở thành người quan trọng nhất trong cuộc đời nhau. Khoảnh khắc đó, anh biết rằng từ nay thế giới của anh đã trọn vẹn vì có em.</p><br>
+                <p>Những ngày qua, chúng ta cũng đã cãi nhau, có những lúc không vui, nhưng em yêu à, những mâu thuẫn nhỏ đó không bao giờ làm thay đổi tình yêu anh dành cho em. Mỗi lần bất đồng, anh lại càng nhận ra rằng em là người không thể thiếu trong đời anh. Và sau mỗi lần cãi vã, được ôm chặt em là khoảnh khắc anh cảm thấy bình yên nhất.</p><br>
+                <p>Anh mơ ước được cùng em đi khắp mọi nẻo đường của thế giới — đi trên bãi biển đầy nắng, ngắm tuyết rơi trên đỉnh núi, dạo qua những con phố nhộn nhịp của thành phố, hay đi bộ trên con đường yên bình nơi thôn quê. Anh muốn cùng em cảm nhận từng bình minh và hoàng hôn, thưởng thức mọi món ăn ngon, chia sẻ niềm vui của mỗi chuyến đi. Về đêm, chúng ta có thể nằm trên bãi cỏ ngắm sao, đếm từng khoảnh khắc lấp lánh chỉ thuộc về chúng ta.</p><br>
+                <p>Em yêu à, anh muốn cùng em lớn lên bên nhau, trải qua mọi thăng trầm của cuộc đời, cùng cười, cùng khóc, cùng giận hờn, cùng yêu thương. Dù tương lai ra sao, anh đều muốn nắm tay em, đi hết quãng đời còn lại. Dù thời gian trôi qua thế nào, tình yêu anh dành cho em sẽ mãi không thay đổi, anh muốn dùng cả đời để chăm sóc, yêu thương và chiều chuộng em.</p><br>
+                <p>Cảm ơn em đã bước vào cuộc đời anh, làm cho thế giới của anh trở nên dịu dàng và sáng rực. Cảm ơn nụ cười của em, khiến anh mỗi ngày đều nguyện chìm đắm trong tình yêu. Cảm ơn em, vì đã cho anh biết rằng tình yêu có thể ấm áp, an yên, và khiến người ta sẵn sàng nỗ lực cả đời vì nhau.</p><br>
+                <p>Chúc mừng Ngày Lễ Tình Nhân, người yêu dấu nhất của anh. Mỗi nhịp tim, mỗi nụ cười, mỗi hơi thở của anh, đều chỉ thuộc về em.</p><br>
+            </div>
+            <div class="letter-footer">
+                <p style="font-weight: bold; font-size: 1.1rem;">Mãi yêu em,</p>
+                <p style="color: var(--love-pink); font-size: 1.6rem; font-weight: 800; margin-top: 5px;">Yap Peng Swee</p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="enter-btn" onclick="closeModal()">Hãy Nhận Lấy Tấm Lòng Của Anh</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" style="display: none; opacity: 0;">
+        <div class="container">
+            <section class="section" style="justify-content: center; text-align: center;">
+                <div style="width: 100%;">
+                    <h1 data-aos="zoom-out">Anh + Em = ❤</h1>
+                    <div data-aos="fade-up" data-aos-delay="400">
+                        <p style="font-weight: 500; color: #555;">Chúng ta đã yêu nhau</p>
+                        <div class="big-number"><span id="days-count">0</span><small style="font-size: 1.8rem;"> ngày</small></div>
+                        <div id="detailed-timer" style="font-size: 1.2rem; color: var(--love-pink);">00:00:00</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="fade-right"><img src="photo1.jpg"></div><div class="text-wrapper"><h2>Ngày ta gặp nhau</h2><div class="typewriter" id="type-1"></div></div></div></section>
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="fade-left"><img src="photo2.jpg"></div><div class="text-wrapper"><h2>Bên Nhau Mãi</h2><div class="typewriter" id="type-2"></div></div></div></section>
+            <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="fade-right"><img src="photo3.jpg"></div><div class="text-wrapper"><h2>Anh Chàng Nghịch Ngợm</h2><div class="typewriter" id="type-3"></div></div></div></section>
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="fade-left"><img src="photo4.jpg"></div><div class="text-wrapper"><h2>Ánh Mắt Hòa nhịp</h2><div class="typewriter" id="type-4"></div></div></div></section>
+            <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="zoom-in" style="flex: 2;"><video loop muted playsinline controls onplay="this.muted=false;document.getElementById('bg-audio').pause();"onpause="document.getElementById('bg-audio').play();"><source src="video1.mp4"></video></div><div class="text-wrapper"><h2>Chuyến Yêu Thương</h2><div class="typewriter" id="type-v1"></div></div></div></section>
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="fade-left"><img src="photo5.jpeg"></div><div class="text-wrapper"><h2>Hội An Yêu</h2><div class="typewriter" id="type-5"></div></div></div></section>
+            <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="fade-right"><img src="photo6.jpg"></div><div class="text-wrapper"><h2>Khoảnh Khắc Du Lịch</h2><div class="typewriter" id="type-6"></div></div></div></section>
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="fade-left"><img src="photo7.jpg"></div><div class="text-wrapper"><h2>Năm Tháng Cùng Em</h2><div class="typewriter" id="type-7"></div></div></div></section>
+            <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="fade-right"><img src="photo8.jpg"></div><div class="text-wrapper"><h2>Nụ Cười Ngọt Ngào</h2><div class="typewriter" id="type-8"></div></div></div></section>
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="zoom-in" style="flex: 2;"><video loop muted playsinline controls onplay="this.muted=false;document.getElementById('bg-audio').pause();"onpause="document.getElementById('bg-audio').play();"><source src="video2.mp4"></video></div><div class="text-wrapper"><h2>Dòng Chảy Của Tình Yêu</h2><div class="typewriter" id="type-v2"></div></div></div></section>
+            <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="fade-right"><img src="photo9.jpg"></div><div class="text-wrapper"><h2>Lãng Mạn Vụn Vặt</h2><div class="typewriter" id="type-9"></div></div></div></section>
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="fade-left"><img src="photo10.jpeg"></div><div class="text-wrapper"><h2>Chúc Mừng Sinh Nhật</h2><div class="typewriter" id="type-10"></div></div></div></section>
+
+	    <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="fade-right"><img src="photo11.jpeg"></div><div class="text-wrapper"><h2>Cũng Là Sinh Nhật Của Anh</h2><div class="typewriter" id="type-11"></div></div></div></section>
+
+
+            
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="fade-left"><img src="photo12.jpg"></div><div class="text-wrapper"><h2>Không Phụ Duyên Gặp Gỡ</h2><div class="typewriter" id="type-12"></div></div></div></section>
+            <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="zoom-in" style="flex: 2;"><video loop muted playsinline controls onplay="this.muted=false;document.getElementById('bg-audio').pause();"onpause="document.getElementById('bg-audio').play();"><source src="video3.mp4"></video></div><div class="text-wrapper"><h2>Yêu Thương Trong Vòng Tay</h2><div class="typewriter" id="type-v3"></div></div></div></section>
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="fade-left"><img src="photo13.jpeg"></div><div class="text-wrapper"><h2>Hành Trình Yêu Thương</h2><div class="typewriter" id="type-13"></div></div></div></section>
+            <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="fade-right"><img src="photo14.jpeg"></div><div class="text-wrapper"><h2>Bên Nhau Trọn Đời</h2><div class="typewriter" id="type-14"></div></div></div></section>
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="fade-left"><img src="photo15.jpeg"></div><div class="text-wrapper"><h2>Bên em, Mọi Thứ Đều Đẹp</h2><div class="typewriter" id="type-15"></div></div></div></section>
+            <section class="section"><div class="story-row"><div class="photo-wrapper" data-aos="fade-right"><img src="photo16.jpg"></div><div class="text-wrapper"><h2>Mãi Duy Nhất</h2><div class="typewriter" id="type-16"></div></div></div></section>
+            <section class="section"><div class="story-row" style="flex-direction: row-reverse;"><div class="photo-wrapper" data-aos="zoom-in" style="flex: 2;"><video loop muted playsinline controls onplay="this.muted=false;document.getElementById('bg-audio').pause();"onpause="document.getElementById('bg-audio').play();"><source src="video4.mp4"></video></div><div class="text-wrapper"><h2>Tình Yêu Vĩnh Cửu</h2><div class="typewriter" id="type-v4"></div></div></div></section>
+
+            <section class="section" style="justify-content: center; text-align: center;">
+                <div data-aos="zoom-in" style="background: var(--glass-bg); padding: 50px; border-radius: 40px;">
+                    <h2 style="margin-bottom: 30px;">Tình yêu chưa kết thúc...</h2>
+                    <button class="enter-btn" style="padding: 18px 80px;" onclick="openModal()">Quà Ngọt Ngào 🎁</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        const stories = {
+            "type-1": "Từ đó, thế giới của anh càng thêm dịu dàng hơn vì em.",
+            "type-2": "Tình yêu ngọt ngào, mãi bên nhau thôi, chẳng rời xa.",
+            "type-3": "Tôi nghịch ngợm nhưng luôn yêu em mãi mãi ngọt ngào thôi.",
+            "type-4": "Trong ánh mắt em, anh nhìn thấy miền chân trời mà anh muốn đến.",
+            "type-v1": "Mỗi khoảnh khắc bên em, anh giữ mãi trong tim em.",
+            "type-5": "Hai ta bên nhau, ba bữa cơm, bốn mùa trôi nhẹ.",
+            "type-6": "Em là cả thế giới của anh, chỉ cần em bên cạnh, anh đã có tất cả.",
+            "type-7": "Anh muốn cùng em đi hết cuộc đời, nắm tay em cho đến khi tóc bạc.",
+            "type-8": "Nụ cười của em là cả thế giới của anh, anh nguyện trọn đời bảo vệ.",
+            "type-v2": "Tình yêu chúng ta nảy nở, vẫn cảm nhận nhau không lời.",
+            "type-9": "Lãng mạn là chúng ta cùng trải qua mọi điều, bên nhau suốt đời.",
+            "type-10": "Sinh nhật đầu tiên bên em, anh sẽ giữ khoảnh khắc này trọn đời.",
+            "type-11": "Sinh nhật của anh, cùng em bên cạnh, yêu thương tràn đầy.",
+            "type-12": "Anh cảm ơn định mệnh, đã để chúng ta gặp nhau đúng lúc, đúng người.",
+            "type-v3": "Em ôm anh như ôm cả thế giới của mình.",
+            "type-13": "Chuyến đi này để lại trong chúng ta đầy ắp kỷ niệm ngọt ngào.",
+            "type-14": "Hành trình đi đến tuổi già, em là điểm cuối ngọt ngào nhất of anh.",
+            "type-15": "Dù là nắng hay mưa, anh sẽ luôn là bờ vai để em tựa vào.",
+            "type-16": "Trong đời anh, chỉ có em là duy nhất, không ai thay thế được.",
+            "type-v4": "Câu chuyện của chúng ta vô tận, tình yêu sẽ mãi nối dài."
+        };
+
+        function verify() {
+            const input = document.getElementById('password-input');
+            if (parseInt(input.value) === 520) {
+                const ov = document.getElementById('password-overlay');
+                ov.style.opacity = '0';
+                setTimeout(() => {
+                    ov.style.display = 'none';
+                    const content = document.getElementById('main-content');
+                    content.style.display = 'block';
+                    setTimeout(() => {
+                        content.style.opacity = '1';
+                        document.body.classList.add('unlocked');
+                        AOS.init({ duration: 1200 });
+                        initTyping();
+                    }, 100);
+                    document.getElementById('bg-audio').play().catch(()=>{});
+                    document.getElementById('music-control').classList.add('rotating');
+                    startHeartRain();
+                }, 1000);
+            } else {
+                input.classList.add('shake');
+                setTimeout(() => input.classList.remove('shake'), 400);
+            }
+        }
+
+        function openModal() {
+            const m = document.getElementById('surprise-modal');
+            m.style.display = 'flex';
+            setTimeout(() => { m.style.opacity = '1'; m.classList.add('modal-active'); }, 10);
+        }
+
+        function closeModal() {
+            const m = document.getElementById('surprise-modal');
+            m.style.opacity = '0'; m.classList.remove('modal-active');
+            setTimeout(() => m.style.display = 'none', 500);
+        }
+
+        function typeWriter(id, text, speed = 100) {
+            let i = 0; const el = document.getElementById(id);
+            if(!el) return;
+            el.innerHTML = "";
+            function type() { if (i < text.length) { el.innerHTML += text.charAt(i++); setTimeout(type, speed); } }
+            type();
+        }
+
+        function initTyping() {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        typeWriter(entry.target.id, stories[entry.target.id]);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.typewriter').forEach(el => obs.observe(el));
+        }
+
+        function updateTimer() {
+            const start = new Date("2024-11-17T00:00:00");
+            const diff = new Date() - start;
+            document.getElementById('days-count').innerText = Math.floor(diff / (1000*60*60*24));
+            const h = String(Math.floor((diff/3600000)%24)).padStart(2,'0');
+            const m = String(Math.floor((diff/60000)%60)).padStart(2,'0');
+            const s = String(Math.floor((diff/1000)%60)).padStart(2,'0');
+            document.getElementById('detailed-timer').innerText = `${h}:${m}:${s}`;
+        }
+        setInterval(updateTimer, 1000);
+
+        function startHeartRain() {
+            const hearts = ['❤️','💖','✨','💕'];
+            setInterval(() => {
+                const h = document.createElement('div');
+                h.className = 'heart-rain';
+                h.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.animationDuration = (Math.random()*3+3)+'s';
+                document.body.appendChild(h);
+                setTimeout(() => h.remove(), 6000);
+            }, 400);
+        }
+
+        function toggleMusic() {
+            const a = document.getElementById('bg-audio');
+            a.paused ? a.play() : a.pause();
+            document.getElementById('music-control').classList.toggle('rotating');
+        }
+    </script>
+</body>
+</html>
